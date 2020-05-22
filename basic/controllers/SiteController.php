@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\UploadFileForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -9,6 +10,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\UploadedFile;
 
 class SiteController extends Controller
 {
@@ -124,5 +126,19 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionUpload()
+    {
+        $model = new UploadFileForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            if ($model->upload()) {
+                Yii::$app->session->setFlash('success', 'Изображение загружено');
+                return $this->refresh();
+            }
+        }
+        return $this->render('upload', ['model' => $model]);
     }
 }
