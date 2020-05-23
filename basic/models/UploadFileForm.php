@@ -19,7 +19,7 @@ class UploadFileForm extends Model
                 'extensions' => ['jpg', 'jpeg', 'png', 'gif'],
                 'checkExtensionByMimeType' => true,
                 'maxSize' => 512000, // 500 килобайт = 500 * 1024 байта = 512 000 байт
-                'tooBig' => 'Limit is 500KB'
+                'tooBig' => 'Максимальный размер файла 500KB'
             ],
         ];
     }
