@@ -22,14 +22,14 @@ $ sudo service {package_name} status
 ### Установка Composer...
 
 ### Настройка hosts, Apache
- sudo mkdir /home/mrsky1001/devel/github/upload-documents
-$ sudo mkdir /home/mrsky1001/devel/github/upload-documents/logs
-sudo nano /etc/hosts
+*  sudo mkdir /home/mrsky1001/devel/github/upload-documents
+* $ sudo mkdir /home/mrsky1001/devel/github/upload-documents/logs
+* sudo nano /etc/hosts
 127.0.0.1       localhost      upload-docs.loc
 
 ### Настройка Apache
-sudo nano /etc/apache2/sites-available/upload-docs.conf
-<VirtualHost *:80>
+* sudo nano /etc/apache2/sites-available/upload-docs.conf
+* <VirtualHost *:80>
     ServerAdmin nikita.nk16@yandex.ru
     DocumentRoot "/home/mrsky1001/devel/github/upload-documents"
     ServerName upload-docs.loc
@@ -37,14 +37,22 @@ sudo nano /etc/apache2/sites-available/upload-docs.conf
     CustomLog "/home/mrsky1001/devel/github/upload-documents/logs/access.log" common
 </VirtualHost>
 
-sudo ln -s /etc/apache2/sites-available/upload-docs.conf /etc/apache2/sites-enabled/upload-docs.conf
-sudo service apache2 restart
+* sudo ln -s /etc/apache2/sites-available/upload-docs.conf /etc/apache2/sites-enabled/upload-docs.conf
+* sudo service apache2 restart
 
 nano /home/mrsky1001/devel/github/upload-documents/index.php
 ### settings after start 
-*Если мы запускаете страницу из папки /web то достаточно просто написать в \config\web.php:
+* Если мы запускаете страницу из папки /web то достаточно просто написать в \config\web.php:
 'cookieValidationKey' => 'какая-то строка', // ВОТ СЮДА напишите какую-то строку
 
-*nvalidConfigException("The directory is not writable by the Web process: {$this->basePath}")
+* nvalidConfigException("The directory is not writable by the Web process: {$this->basePath}")
 sudo usermod  -a -G mrsky1001 www-data 
 . restart_appache.sh
+
+* composer update
+
+  snap run heroku
+Examples:
+
+    snap run heroku --version
+    snap run heroku login -i
