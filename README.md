@@ -32,9 +32,18 @@ sudo nano /etc/hosts
 
 ### Настройка Apache
 sudo nano /etc/apache2/sites-available/upload-docs.conf
+/etc/apache2/sites-available/upload-docs.conf         500/500               100%
 <VirtualHost *:80>
-    ServerAdmin nikita.nk16@yandex.ru
-    DocumentRoot "/home/mrsky1001/devel/github/upload-documents"
+    <Directory /home/mrsky1001/devel/github/upload-documents>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride None
+        Order allow,deny
+        allow from all
+
+        Require all granted
+
+    </Directory>
+    DocumentRoot "/home/mrsky1001/devel/github/upload-documents/basic/web/"
     ServerName upload-docs.loc
     ErrorLog "/home/mrsky1001/devel/github/upload-documents/logs/error.log"
     CustomLog "/home/mrsky1001/devel/github/upload-documents/logs/access.log" common
